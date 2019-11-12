@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setup(
     name='django-github-s3',
-    version="v01",
+    version="v0.14",
     packages=['github_storages',],
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
-    install_requires=['Django>=2.11', "Pillow>=6.2.1"],
+    install_requires=['django>=1.11', "Pillow>=6.2.1", "requests>=2", "simplejson==3.16.0"],
     extras_require={
         'libcloud': ['apache-libcloud'],
         'sftp': ['paramiko'],
