@@ -1,5 +1,5 @@
 from django.contrib import admin
-from storages_github.models import ImageInfo
+from github_storages.models import ImageInfo
 # Register your models here.
 
 admin.site.register(ImageInfo)
