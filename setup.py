@@ -1,14 +1,12 @@
 from setuptools import setup
 
-import storages
-
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
     name='django-github-s3',
-    version=v_01,
-    packages=['storages_github', 'storages_github.backend'],
+    version="v_01",
+    packages=['github_storages',],
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
     install_requires=['Django>=2.11', "Pillow>=6.2.1"],
     extras_require={
