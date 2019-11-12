@@ -7,7 +7,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='django-github-s3',
-    version=storages.__version__,
+    version=v_01,
     packages=['storages_github', 'storages_github.backend'],
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
     install_requires=['Django>=2.11'],
