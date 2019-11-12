@@ -21,7 +21,7 @@ setup(
     description='Support for many storage backends in Django',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/vivekchandrabs/django-github-s3.git',
+    url='https://github.com/vivekchandrabs/django-github-s3/archive/v_01.tar.gz',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
