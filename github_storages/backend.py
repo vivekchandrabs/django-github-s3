@@ -28,22 +28,39 @@ from django.db import models
 from github_storages.utils import get_url
 
 class BackendStorages(Storage):
+	""" Github Backend storage class for Django pluggable storage system."""
 
 	def __init__(self):
+		''' Get all the credentials from the settings.py file 
+			and initialize them to global variables. 
+		'''
 		self.github_handle = settings.GITHUB_HANDLE
 		self.token = settings.ACCESS_TOKEN
 		self.repo_name = settings.GITHUB_REPO_NAME
-		self.location = "/"
 
 	def url(self, name):
 		return name
 
 	def save(self, name, content, max_length=None):
+		''' Saves the file uploaded from the user side to github '''
 		name = posixpath.basename(name).split("\\")[-1]
 		
 		return self._save(name, content)
 
 	def _save(self, name, content):
+		'''
+		:Required:
+			name || (name of file) || type string
+			content || (content of the file)
+
+		:Action:
+			* Check for the available file name in the github.
+			* If found then calls the upload_file_to_git function
+
+		:Returns:
+			* Download URL of the file
+
+		'''
 		while True:
 			if self.exists(name):
 				name = self.get_available_name(name)
@@ -55,6 +72,20 @@ class BackendStorages(Storage):
 		return response["content"]["download_url"]
 
 	def exists(self, name):
+		'''
+		:Required:
+			name || (name of the file) || type string
+
+		:Action:
+			* Gets the fetch url from the get_url method.
+			* Fetchs the response from the git using requests library
+
+		:Returns:
+			* Returns True if File exists on github
+			* Returns False if File does not exits on github
+
+		'''
+
 		fetch_url = get_url(name)
 		response = requests.get(fetch_url)
 
@@ -63,12 +94,41 @@ class BackendStorages(Storage):
 		else:
 			return False
 
-	def get_available_name(self, content, max_length=None):
+	def get_available_name(self, name, max_length=None):
+		'''
+		:Required:
+			name || (name of the file) || type string
+
+		:Action:
+		 	* Appends a random hash value to the file name
+
+		 :Returns:
+		 	* New file name
+		'''
+
 		random_hash = random.random() * 1000
-		content = str(int(random_hash)) + content
-		return content
+		name = str(int(random_hash)) + name
+		return name
 
 	def upload_file_to_git(self, name, content):
+		'''
+		:Required:
+			name || (name of the file) || type string
+			content || Content of the file
+		
+		:Action:
+			* Gets the upload_url from the get_url method
+			* Constructs the payload.
+			* Sends put request to the upload_url with payload and headers.
+
+		:Returns
+			* Content of the response obtained from the github.
+
+		:Raise Errors:
+			* If github returns 404 status_code.
+
+		'''
+
 		upload_url = get_url(name)
 
 		headers ={"Authorization": f"token {self.token}"}
@@ -89,13 +149,42 @@ class BackendStorages(Storage):
 		return json_data
 
 	def convert_to_base64(self, content):
+		'''
+		:Required:
+			content || Content of the uploaded file
+
+		:Action:
+			* Converts the content of the file to base64 format.
+
+		:Returns:
+			base64 format string.
+		'''
+
 		my_string = base64.b64encode(content.read())
 		return my_string
 
 	def delete(self, name):
+		'''
+		:Required:
+			name || (name of the file) || type string
+
+		:Action: 
+			* Gets the fetch url from the get_url method
+			* Gets the response from the github for the particular content
+			* Extracts the sha from the response
+
+			* Constructs the payload along with the sha
+			* Gets the delete url from the get_url methods.
+			* Calls delete url with the delete method.
+
+		:Returns:
+			True upon proper deletion of the file.
+
+		:Raise:
+			If the file does not exists || status_code = 404
+		'''
+
 		name = posixpath.basename(name).split("\\")[-1]
-		delete_url = get_url(name)
-		headers = {"Authorization": f"token {self.token}"}
 
 		fetch_url = get_url(name)
 		response = requests.get(fetch_url)
@@ -106,6 +195,9 @@ class BackendStorages(Storage):
 
 		except:
 			raise IOError(response.content)
+
+		delete_url = get_url(name)
+		headers = {"Authorization": f"token {self.token}"}
 
 		payload = {}
 		payload["message"] = name
