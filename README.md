@@ -34,8 +34,8 @@ Issues are tracked via GitHub issues at the [project issue page](https://github.
 
 ## Contributing
 
- 1. Check for open issues at the project issues page or open a new issues to start a discussion about a feature or bug
- 2. Fork the django-github-s3 repository on GitHub to start making changes in your own branch.
+ 1. [Check for open issues](https://github.com/vivekchandrabs/django-github-s3/issues) at the project issues page or open a new issues to start a discussion about a feature or bug
+ 2. Fork the [django-github-s3 repository on GitHub](https://github.com/vivekchandrabs/django-github-s3) to start making changes in your own branch.
 
 
 
