@@ -16,7 +16,7 @@ setup(
     author='Vivek Chandra B S',
     author_email='vivek.chandra.301096@gmail.com',
     license='Mozilla Public License Version 2.0',
-    description='Support for many storage backends in Django',
+    description='django-github-s3 is a project to provide beginners a storage backend on github for free.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/vivekchandrabs/django-github-s3/archive/v_01.tar.gz',
