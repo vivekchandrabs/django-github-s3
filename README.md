@@ -10,7 +10,7 @@ Once the installation is done, setup the following in the settings.py file.
        DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
        GITHUB_HANDLE = "Your Github Handle"
        ACCESS_TOKEN = "Your Github Access Token"
-       GITHUB_REPO_NAME = "Your New Github Repository Name"
+       GITHUB_REPO_NAME = "Your New Github Public Repository Name"
 
 
 If you are using ImageField or FileField then do not specify upload_to parameters
@@ -33,10 +33,11 @@ Therefore django-github-s3 helps beginners to store the media files on github wi
 Issues are tracked via GitHub issues at the [project issue page](https://github.com/vivekchandrabs/django-github-s3/issues).
 
 ## Contributing
-
  1. [Check for open issues](https://github.com/vivekchandrabs/django-github-s3/issues) at the project issues page or open a new issues to start a discussion about a feature or bug
  2. Fork the [django-github-s3 repository on GitHub](https://github.com/vivekchandrabs/django-github-s3) to start making changes in your own branch.
-
+ 
+## Warning !!!
+The github repository that you have to create should be public. Storing any confidential information is not recommanded.
 
 
 
