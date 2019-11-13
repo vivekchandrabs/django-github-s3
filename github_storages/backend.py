@@ -1,3 +1,17 @@
+# Github storage class for Django pluggable storage system.
+#
+# Author: Vivek Chandra B S <vivek.chandra.301096@gmail.com>
+#
+# License: Mozilla Public License Version 2.0
+#
+# Usage:
+# 
+# Add below settings.py:
+# DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
+# GITHUB_HANDLE = 'Your Github Handle'
+# ACCESS_TOKEN = "Your Github Access Token"
+# GITHUB_REPO_NAME = "Your Github Repository Name"
+
 import requests
 import simplejson as json
 import base64
@@ -11,7 +25,6 @@ from django.utils.encoding import force_text
 from django.conf import settings
 from django.db import models
 
-from github_storages.models import ImageInfo
 from github_storages.utils import get_url
 
 class BackendStorages(Storage):
@@ -38,9 +51,6 @@ class BackendStorages(Storage):
 				break
 
 		response = self.upload_file_to_git(name, content)
-
-		imageinfo = ImageInfo.objects.create(image_url=name,
-											sha=response["content"]["sha"])
 
 		return response["content"]["download_url"]
 
@@ -85,23 +95,30 @@ class BackendStorages(Storage):
 	def delete(self, name):
 		name = posixpath.basename(name).split("\\")[-1]
 		delete_url = get_url(name)
-		headers ={"Authorization": f"token {self.token}"}
+		headers = {"Authorization": f"token {self.token}"}
 
-		image_info = ImageInfo.objects.get(image_url=name)
+		fetch_url = get_url(name)
+		response = requests.get(fetch_url)
+
+		try:
+			json_data = json.loads(response.content)
+			sha = json_data["sha"]
+
+		except:
+			raise IOError(response.content)
 
 		payload = {}
 		payload["message"] = name
 		payload["committer"] = {}
 		payload["committer"]["name"] = "Monalisa Octocat"
 		payload["committer"]["email"] = "octocat@github.com"
-		payload["sha"] = image_info.sha
+		payload["sha"] = sha
 
 		response = requests.delete(url=delete_url, data=json.dumps(payload), headers=headers)
 
 		if response.status_code == 404:
 			raise IOError(response.content)
 
-		image_info.delete()
 		return 1
 
 
