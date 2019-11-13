@@ -24,13 +24,13 @@ Set it to just:
 ## About
 django-github-s3 is a project to provide beginners a storage backend on github for free.
 
-Since other simple-storage services reqires credit-card information to setup an account and get started. 
+Since other simple-storage-services requires credit-card information to setup an account and get started. 
 There is a lot of traction in between for the beginners. 
 
-There django-github-s3 helps bigineers to store the media files on github with very less number of steps required in the initial setup.
+Therefore django-github-s3 helps beginners to store the media files on github with very less number of steps required in the initial setup.
 
-Found a Bug? Something Unsupported?
-Issues are tracked via GitHub issues at the project issue page.
+## Found a Bug? Something Unsupported?
+Issues are tracked via GitHub issues at the [project issue page](https://github.com/vivekchandrabs/django-github-s3/issues).
 
 ## Contributing
 
