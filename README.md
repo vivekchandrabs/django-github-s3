@@ -13,6 +13,14 @@ Once the installation is done, setup the following in the settings.py file.
        GITHUB_REPO_NAME = "Your New Github Public Repository Name"
 
 
+For example:
+       DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
+       GITHUB_HANDLE = "vivekchandrabs"
+       ACCESS_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+       GITHUB_REPO_NAME = "Example-Test-App"
+       
+
+
 If you are using ImageField or FileField then do not specify upload_to parameters
       
        photo = models.ImageField(upload_to="pics/", null=True, blank=True)
