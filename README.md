@@ -19,7 +19,7 @@ For Example:
        ACCESS_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
        GITHUB_REPO_NAME = "Example-Test-Repo"
         
-**Here is a video on how to get the [GitHub Access Token]**(https://www.loom.com/share/1ac9b95756e242c290e2329683737c2f)
+**Here is a video on how to get the [GitHub Access Token](https://www.loom.com/share/1ac9b95756e242c290e2329683737c2f)**
 
 
 If you are using ImageField or FileField then do not specify upload_to parameters
