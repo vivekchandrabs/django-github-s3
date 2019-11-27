@@ -50,7 +50,7 @@ The github repository that you have to create should be public. Storing any conf
 
 ## Thanks To:
 
-* [Vidyadhar Sharma](https://github.com/justvidyadhar) for guiding me through out this project.
+* [Vidyadhar Sharma](https://github.com/justvidyadhar) for guiding me throughout this project.
 * [Speckbit Exploratories](https://www.speckbit.com) for giving me this opportunity.
 
 
