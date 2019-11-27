@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='django-github-s3',
-    version="v0.18",
+    version="v0.20",
     packages=['github_storages',],
     python_requires=">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*",
     install_requires=['django>=1.11', "Pillow>=6.2.1", "requests>=2", "simplejson==3.16.0"],
@@ -16,7 +16,7 @@ setup(
     author='Vivek Chandra B S',
     author_email='vivek.chandra.301096@gmail.com',
     license='Mozilla Public License Version 2.0',
-    description='django-github-s3 is a project to provide beginners a storage backend on github for free.',
+    description='django-github-s3 is a package for Django to provide beginners a storage backend on github for free.',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url='https://github.com/vivekchandrabs/django-github-s3/archive/v_01.tar.gz',
