@@ -48,6 +48,11 @@ Issues are tracked via GitHub issues at the [project issue page](https://github.
 ## Warning !!!
 The github repository that you have to create should be public. Storing any confidential information is not recommended.
 
+## Thanks To:
+
+* [Vidyadhar Sharma](https://github.com/justvidyadhar) for guiding me through out this project.
+* [Speckbit Exploratories](https://www.speckbit.com)
+
 
 
 
