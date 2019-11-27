@@ -46,7 +46,12 @@ Issues are tracked via GitHub issues at the [project issue page](https://github.
  2. Fork the [django-github-s3 repository on GitHub](https://github.com/vivekchandrabs/django-github-s3) to start making changes in your own branch.
  
 ## Warning !!!
-The github repository that you have to create should be public. Storing any confidential information is not recommanded.
+The github repository that you have to create should be public. Storing any confidential information is not recommended.
+
+## Thanks To:
+
+* [Vidyadhar Sharma](https://github.com/justvidyadhar) for guiding me throughout this project.
+* [Speckbit Exploratories](https://www.speckbit.com) for giving me this opportunity.
 
 
 
