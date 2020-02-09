@@ -38,6 +38,11 @@ class BackendStorages(Storage):
 		self.token = settings.ACCESS_TOKEN
 		self.repo_name = settings.GITHUB_REPO_NAME
 
+		try:
+			self.media_bucket = settings.MEDIA_BUCKET_NAME
+		except:
+			self.media_bucket = None
+
 	def url(self, name):
 		return name
 
@@ -86,7 +91,7 @@ class BackendStorages(Storage):
 
 		'''
 
-		fetch_url = get_url(name)
+		fetch_url = get_url(name, self.media_bucket)
 		response = requests.get(fetch_url)
 
 		if response.status_code == 200:
@@ -129,7 +134,7 @@ class BackendStorages(Storage):
 
 		'''
 
-		upload_url = get_url(name)
+		upload_url = get_url(name, self.media_bucket)
 
 		headers ={"Authorization": f"token {self.token}"}
 		
@@ -186,7 +191,7 @@ class BackendStorages(Storage):
 
 		name = posixpath.basename(name).split("\\")[-1]
 
-		fetch_url = get_url(name)
+		fetch_url = get_url(name, self.media_bucket)
 		response = requests.get(fetch_url)
 
 		try:
@@ -196,7 +201,7 @@ class BackendStorages(Storage):
 		except:
 			raise IOError(response.content)
 
-		delete_url = get_url(name)
+		delete_url = get_url(name, self.media_bucket)
 		headers = {"Authorization": f"token {self.token}"}
 
 		payload = {}
