@@ -11,6 +11,7 @@ Once the installation is done, setup the following in the settings.py file.
        GITHUB_HANDLE = "Your Github Handle"
        ACCESS_TOKEN = "Your Github Access Token"
        GITHUB_REPO_NAME = "Your New Github Public Repository Name"
+       MEDIA_BUCKET_NAME = "Your media bucket name"
 
 For Example:
 
@@ -18,6 +19,7 @@ For Example:
        GITHUB_HANDLE = "vivekchandrabs"
        ACCESS_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
        GITHUB_REPO_NAME = "Example-Test-Repo"
+       MEDIA_BUCKET_NAME = "media"
         
 **Here is a video on how to get the [GitHub Access Token](https://www.loom.com/share/1ac9b95756e242c290e2329683737c2f)**
 
