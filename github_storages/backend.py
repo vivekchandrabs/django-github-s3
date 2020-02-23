@@ -11,6 +11,7 @@
 # GITHUB_HANDLE = 'Your Github Handle'
 # ACCESS_TOKEN = "Your Github Access Token"
 # GITHUB_REPO_NAME = "Your Github Repository Name"
+# MEDIA_BUCKET_NAME = "Media Bucket Name"
 
 import requests
 import simplejson as json
@@ -48,11 +49,14 @@ class BackendStorages(Storage):
 
 	def save(self, name, content, max_length=None):
 		''' Saves the file uploaded from the user side to github '''
-		name = posixpath.basename(name).split("\\")[-1]
-		
-		return self._save(name, content)
 
-	def _save(self, name, content):
+		path_with_file_name = posixpath.basename(name).split("\\")
+		name = path_with_file_name.pop()
+		path = path_with_file_name
+		
+		return self._save(name, path, content)
+
+	def _save(self, name, path, content):
 		'''
 		:Required:
 			name || (name of file) || type string
@@ -67,16 +71,16 @@ class BackendStorages(Storage):
 
 		'''
 		while True:
-			if self.exists(name):
+			if self.exists(name, path):
 				name = self.get_available_name(name)
 			else:
 				break
 
-		response = self.upload_file_to_git(name, content)
+		response = self.upload_file_to_git(name, path, content)
 
 		return response["content"]["download_url"]
 
-	def exists(self, name):
+	def exists(self, name, path):
 		'''
 		:Required:
 			name || (name of the file) || type string
@@ -91,7 +95,7 @@ class BackendStorages(Storage):
 
 		'''
 
-		fetch_url = get_url(name, self.media_bucket)
+		fetch_url = get_url(name, path, self.media_bucket)
 		response = requests.get(fetch_url)
 
 		if response.status_code == 200:
@@ -115,7 +119,7 @@ class BackendStorages(Storage):
 		name = str(int(random_hash)) + name
 		return name
 
-	def upload_file_to_git(self, name, content):
+	def upload_file_to_git(self, name, path, content):
 		'''
 		:Required:
 			name || (name of the file) || type string
@@ -134,7 +138,7 @@ class BackendStorages(Storage):
 
 		'''
 
-		upload_url = get_url(name, self.media_bucket)
+		upload_url = get_url(name, path, self.media_bucket)
 
 		headers ={"Authorization": f"token {self.token}"}
 		
@@ -189,9 +193,20 @@ class BackendStorages(Storage):
 			If the file does not exists || status_code = 404
 		'''
 
-		name = posixpath.basename(name).split("\\")[-1]
+		image_path = self.url(name).split("/master/")[-1]
 
-		fetch_url = get_url(name, self.media_bucket)
+		path_with_file_name = image_path.split("/")
+		name = path_with_file_name.pop()
+
+		if path_with_file_name[0] == self.media_bucket:
+			del path_with_file_name[0]
+
+		path = path_with_file_name
+
+		delete_url = get_url(name, path, self.media_bucket)
+		headers = {"Authorization": f"token {self.token}"}
+
+		fetch_url = get_url(name, path, self.media_bucket)
 		response = requests.get(fetch_url)
 
 		try:
