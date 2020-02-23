@@ -19,7 +19,7 @@ setup(
     description='django-github-s3 is a package for Django to provide beginners a storage backend on github for free.',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url='https://github.com/vivekchandrabs/django-github-s3/archive/v_01.tar.gz',
+    url='https://github.com/vivekchandrabs/django-github-s3/archive/V_04.tar.gz',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Web Environment',
