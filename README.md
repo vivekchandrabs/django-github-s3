@@ -24,13 +24,9 @@ For Example:
 **Here is a video on how to get the [GitHub Access Token](https://www.loom.com/share/1ac9b95756e242c290e2329683737c2f)**
 
 
-If you are using ImageField or FileField then do not specify upload_to parameters
+If you are using ImageField or FileField upload_to parameter can be specified for better organization of files.
       
        photo = models.ImageField(upload_to="pics/", null=True, blank=True)
-
-Set it to just:
-        
-       photo = models.ImageField(null=True, blank=True)
        
 ## About
 django-github-s3 is a project to provide beginners a storage backend on github for free.
