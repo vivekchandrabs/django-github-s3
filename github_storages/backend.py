@@ -216,7 +216,7 @@ class BackendStorages(Storage):
 		except:
 			raise IOError(response.content)
 
-		delete_url = get_url(name, self.media_bucket)
+		delete_url = get_url(name, path, self.media_bucket)
 		headers = {"Authorization": f"token {self.token}"}
 
 		payload = {}
