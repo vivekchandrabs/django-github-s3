@@ -7,6 +7,15 @@ Installing from PyPi:
         
 Once the installation is done, setup the following in the settings.py file.
 
+Include the following package in the INSTALLED_APPS
+       
+       INSTALLED_APPS = [
+            ....
+            'github_storages',
+       ]
+
+After including the package setup the following in the settings.py
+
        DEFAULT_FILE_STORAGE = "github_storages.backend.BackendStorages"
        GITHUB_HANDLE = "Your Github Handle"
        ACCESS_TOKEN = "Your Github Access Token"
