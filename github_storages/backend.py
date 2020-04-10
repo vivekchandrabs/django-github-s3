@@ -233,4 +233,40 @@ class BackendStorages(Storage):
 
 		return 1
 
+	def size(self, name):
+		'''
+		:Required:
+			name || (name of the file) || type string
 
+		:Action: 
+			* Gets the Image url from the get_url method
+			* Gets the response from the github for the particular content
+			* Extracts the size from the response.
+
+		:Returns:
+			Size of the Image
+
+		:Raise:
+			If the file does not exists || status_code = 404
+		'''
+		name = str(name)
+
+		image_path = self.url(name).split("/master/")[-1]
+		path_with_file_name = image_path.split("/")
+		name = path_with_file_name.pop()
+
+		if path_with_file_name[0] == self.media_bucket:
+			del path_with_file_name[0]
+
+		path = path_with_file_name
+		get_size_url = get_url(name, path, self.media_bucket)
+
+		headers = {"Authorization": f"token {self.token}"}
+		response = requests.get(get_size_url, headers)
+
+		if response.status_code == 404:
+			raise IOError(response.content)
+
+		json_data = json.loads(response.content)
+		
+		return json_data['size']
