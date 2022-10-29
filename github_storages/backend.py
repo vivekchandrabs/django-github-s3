@@ -22,7 +22,7 @@ import random
 
 from django.conf import settings
 from django.core.files.storage import Storage
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from django.conf import settings
 from django.db import models
 
